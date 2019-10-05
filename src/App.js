@@ -1,9 +1,15 @@
 import React from 'react';
 import './App.css';
+import api from './services/api';
 import logo from './assets/logo.svg';
 
 
 function App() {
+  function heandleSubmit(event) {
+    event.preventDefault();
+
+    console.log('Submit Form!')
+  }
   return (
     <div className="container">
       <img src={logo} alt="AirCnC - Marcus Almeida"/>
@@ -13,7 +19,7 @@ function App() {
           Ofereça <strong>Spots</strong> para programadores e encontre <strong>talentos</strong> para sua empresa.
         </p>
 
-        <form>
+        <form onSubmit={heandleSubmit}>
           <label htmlFor="email">E-mail *</label>
           <input 
             type        = "email"
