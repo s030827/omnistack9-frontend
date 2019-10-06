@@ -11,10 +11,11 @@ export default function Login({ history }) {
     const response = await Api.post('/sessions', { email });
     const { _id }  = response.data;
 
-    console.log(_id);
+    localStorage.setItem('user', _id);
+    // console.log(_id);
 
-    history.push('/dashboard')
-  }
+    history.push('/dashboard');
+  };
 
   return (
     <>
