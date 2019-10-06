@@ -1,15 +1,21 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from 'react';
 import api from './services/api';
+import './App.css';
+
 import logo from './assets/logo.svg';
 
 
 function App() {
-  function heandleSubmit(event) {
+  const [email, setEmail] = useState('');
+
+  async function heandleSubmit(event) {
     event.preventDefault();
 
-    console.log('Submit Form!')
+    const response = await api.post('/sessions', { email });
+  
+    console.log(response);
   }
+
   return (
     <div className="container">
       <img src={logo} alt="AirCnC - Marcus Almeida"/>
@@ -21,10 +27,12 @@ function App() {
 
         <form onSubmit={heandleSubmit}>
           <label htmlFor="email">E-mail *</label>
-          <input 
+          <input
             type        = "email"
             id          = "email"
             placeholder = "Seu melhor E-mail"
+            value       = {email}
+            onChange    = {event => setEmail(event.target.value)}
           />
 
           <button className="btn" type="submit">Entrar</button>
