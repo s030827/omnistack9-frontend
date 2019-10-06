@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Api from '../../services/api';
 
-export default function Login() {
+export default function Login({ history }) {
 
   const [email, setEmail] = useState('');
 
@@ -12,6 +12,8 @@ export default function Login() {
     const { _id }  = response.data;
 
     console.log(_id);
+
+    history.push('/dashboard')
   }
 
   return (
