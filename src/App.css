@@ -50,6 +50,13 @@ body, input, button {
   flex-direction: column;
 }
 
+.content form label span {
+  font-weight: 14px;
+  color: #444444;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
 .container form label {
   font-size: 14px;
   color: black;
