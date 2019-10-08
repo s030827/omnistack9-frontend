@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
+import Api from '../../services/api';
 
 import './style.css';
 import camera from '../../assets/camera.svg';
 // import { url } from 'inspector';
 
-export default function New() {
+export default function New({ history }) {
   const [thumbnail, setThumbnail] = useState('');
   const [company, setCompany]     = useState('');
   const [techs, setTech]          = useState('');
@@ -14,8 +15,22 @@ export default function New() {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
   }, [thumbnail])
 
-  function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
 
+    const data    = new FormData();
+    const user_id = localStorage.getItem('user');
+
+    data.append('thumbnail', thumbnail);
+    data.append('company', company);
+    data.append('techs', techs);
+    data.append('prices', prices);
+
+    await Api.post('/spots', data, {
+      headers: { user_id }
+    });
+
+    history.push('/dashboard');
   }
 
   return (
@@ -54,9 +69,11 @@ export default function New() {
           value={prices}
           onChange={event => setPrice(event.target.value)}
         />
+      
+        <button type="submit" className="btn">Cadastrar Spot</button>
+      
       </form>
 
-      <button type="submit" className="btn">Cadastrar Spot</button>
     </>
   );
 };
